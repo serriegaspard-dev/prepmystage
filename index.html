@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrepMyStage — Décroche ton stage en grande entreprise</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #5B4FE8;
+    --purple-light: #EEE CFF;
+    --purple-dark: #3730A3;
+    --accent: #F0E6FF;
+    --text: #0F0E17;
+    --muted: #6B6980;
+    --border: rgba(91,79,232,0.15);
+    --bg: #FAFAF8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--purple);
+    letter-spacing: -0.02em;
+  }
+  .nav-cta {
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    padding: 0.55rem 1.2rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: var(--purple-dark);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(91,79,232,0.2);
+    animation: fadeUp 0.5s ease both;
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--purple);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.4rem;
+    animation: fadeUp 0.5s 0.1s ease both;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--purple);
+    position: relative;
+  }
+  h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 3px;
+    background: var(--purple);
+    opacity: 0.25;
+    border-radius: 2px;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    line-height: 1.7;
+    animation: fadeUp 0.5s 0.2s ease both;
+  }
+
+  .social-proof {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.5s 0.25s ease both;
+  }
+  .avatars { display: flex; }
+  .avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    margin-left: -8px;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+  }
+  .avatar:first-child { margin-left: 0; }
+  .av1 { background: #7C6FF7; }
+  .av2 { background: #F472B6; }
+  .av3 { background: #34D399; }
+  .av4 { background: #F59E0B; }
+  .proof-text { font-size: 0.85rem; color: var(--muted); }
+  .proof-text strong { color: var(--text); font-weight: 500; }
+
+  /* PRICE BOX */
+  .price-box {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 420px;
+    margin: 0 auto 1.5rem;
+    animation: fadeUp 0.5s 0.3s ease both;
+  }
+  .price-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0.5rem;
+  }
+  .price-new {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--purple);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .price-new sup { font-size: 1.4rem; vertical-align: super; }
+  .price-new sub { font-size: 1rem; font-weight: 400; }
+  .price-old {
+    font-size: 1.1rem;
+    color: #bbb;
+    text-decoration: line-through;
+    font-weight: 300;
+  }
+  .price-pill {
+    background: #ECFDF5;
+    color: #059669;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(5,150,105,0.2);
+  }
+  .price-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .price-sub strong { color: var(--text); }
+
+  .cta-btn {
+    display: block;
+    width: 100%;
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
+  .cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .cta-btn:active { transform: translateY(0); }
+
+  .cta-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .spots-bar {
+    margin-top: 1.2rem;
+    background: #F3F0FF;
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
+  .spots-label { color: var(--purple-dark); font-weight: 500; }
+  .spots-count { color: var(--purple); font-weight: 700; font-family: 'Syne', sans-serif; }
+  .progress-track {
+    height: 4px;
+    background: rgba(91,79,232,0.15);
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 46%;
+    background: var(--purple);
+    border-radius: 4px;
+    animation: grow 1.2s 0.8s ease both;
+  }
+  @keyframes grow { from { width: 0; } }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 720px;
+    margin: 0 auto;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* HOW IT WORKS */
+  .section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+    line-height: 1.2;
+  }
+
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex;
+    gap: 1.5rem;
+    padding-bottom: 2.5rem;
+    position: relative;
+  }
+  .step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 19px; top: 44px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .step-num {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--accent);
+    border: 1.5px solid rgba(91,79,232,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--purple);
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .step-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.01em;
+  }
+  .step-body p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* FEATURES GRID */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .feature-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .feature-card:hover { border-color: rgba(91,79,232,0.4); }
+  .feature-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0.8rem;
+  }
+  .feature-icon svg { width: 16px; height: 16px; stroke: var(--purple); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .feature-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* TESTIMONIAL */
+  .testimonial-block {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 1rem;
+  }
+  .stars { color: #F59E0B; font-size: 1rem; margin-bottom: 0.8rem; letter-spacing: 2px; }
+  .testimonial-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text);
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 1.5px solid rgba(91,79,232,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--purple);
+  }
+  .author-info p { font-size: 0.85rem; font-weight: 500; }
+  .author-info span { font-size: 0.78rem; color: var(--muted); }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 1.2rem 0;
+    cursor: pointer;
+  }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .faq-toggle {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    font-size: 14px;
+    color: var(--purple);
+    font-weight: 700;
+  }
+  .faq-a {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 0.7rem;
+    font-weight: 300;
+    display: none;
+  }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+  /* BOTTOM CTA */
+  .bottom-cta {
+    background: var(--purple);
+    margin: 0 2rem 4rem;
+    border-radius: 20px;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .bottom-cta h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+  .bottom-cta p { color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-weight: 300; }
+  .cta-btn-white {
+    display: inline-block;
+    background: #fff;
+    color: var(--purple);
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .cta-btn-white:hover { transform: translateY(-1px); opacity: 0.92; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+  footer strong { color: var(--purple); font-weight: 500; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(15,14,23,0.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+  }
+  .modal h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .modal p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; font-weight: 300; }
+  .modal input {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .modal input:focus { border-color: var(--purple); }
+  .modal-submit {
+    width: 100%;
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-bottom: 0.8rem;
+  }
+  .modal-submit:hover { opacity: 0.85; }
+  .modal-close {
+    font-size: 0.8rem;
+    color: var(--muted);
+    cursor: pointer;
+    text-decoration: underline;
+    background: none; border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .success-msg {
+    display: none;
+    background: #ECFDF5;
+    border: 1px solid rgba(5,150,105,0.3);
+    border-radius: 10px;
+    padding: 1rem;
+    color: #065F46;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 1.2rem 2.5rem; }
+    .section { padding: 3rem 1.2rem; }
+    .bottom-cta { margin: 0 1rem 3rem; padding: 2.5rem 1.5rem; }
+    nav { padding: 1rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">PrepMyStage</div>
+  <a href="#" class="nav-cta" onclick="openModal()">Accès fondateur — 9€/mois</a>
+</nav>
+
+<section class="hero">
+  <div class="badge">
+    <div class="badge-dot"></div>
+    Offre de lancement · 50 places uniquement
+  </div>
+
+  <h1>Décroche ton stage en <em>grande entreprise</em> dès le 1er entretien</h1>
+
+  <p class="hero-sub">
+    Tu colles le lien de ton offre. L'IA analyse l'entreprise, le poste et simule exactement les questions que ton recruteur va poser — avec un feedback personnalisé sur chaque réponse.
+  </p>
+
+  <div class="social-proof">
+    <div class="avatars">
+      <div class="avatar av1">LM</div>
+      <div class="avatar av2">SR</div>
+      <div class="avatar av3">AK</div>
+      <div class="avatar av4">TB</div>
+    </div>
+    <span class="proof-text"><strong>23 étudiants</strong> déjà en liste d'attente</span>
+  </div>
+
+  <div class="price-box">
+    <div class="price-top">
+      <div class="price-new"><sup>€</sup>9<sub>/mois</sub></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+          <span class="price-old">19€/mois</span>
+          <span class="price-pill">-53%</span>
+        </div>
+        <div class="price-sub">Prix garanti à vie pour les <strong>50 premiers</strong></div>
+      </div>
+    </div>
+    <a href="#" class="cta-btn" onclick="openModal(); return false;">Rejoindre au prix fondateur →</a>
+    <p class="cta-note">Aucune CB requise maintenant · Accès dès le lancement · Résiliation libre</p>
+    <div class="spots-bar">
+      <span class="spots-label">Places restantes</span>
+      <span class="spots-count">27 / 50</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section">
+  <div class="section-label">Comment ça marche</div>
+  <h2 class="section-title">3 étapes pour arriver préparé à n'importe quel entretien</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <h3>Tu colles ton offre de stage</h3>
+        <p>Lien LinkedIn, Welcome to the Jungle, ou simple description du poste. PrepMyStage analyse l'entreprise, le secteur et les compétences recherchées en 10 secondes.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <h3>L'IA simule ton recruteur</h3>
+        <p>15 questions personnalisées selon l'entreprise, le poste et ton profil. En français et en anglais. Comportementales, motivationnelles, techniques — comme dans le vrai entretien.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <h3>Tu reçois un feedback détaillé</h3>
+        <p>Structure STAR, points forts, axes d'amélioration et les questions à poser au recruteur. Entraîne-toi autant de fois que tu veux jusqu'au jour J.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section">
+  <div class="section-label">Fonctionnalités</div>
+  <h2 class="section-title">Tout ce dont tu as besoin pour décrocher ton stage</h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h4>Personnalisé par entreprise</h4>
+      <p>Les questions sont générées selon la culture, les valeurs et le secteur de CHAQUE entreprise.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </div>
+      <h4>Feedback instantané</h4>
+      <p>Analyse de chaque réponse avec la méthode STAR et des conseils concrets pour t'améliorer.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+      </div>
+      <h4>Français & anglais</h4>
+      <p>Simule des entretiens en français et en anglais pour les postes internationaux.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h4>Séances illimitées</h4>
+      <p>Entraîne-toi autant de fois que tu veux. Plus tu pratiques, plus tu es confiant.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h4>Créé pour les éco</h4>
+      <p>Conçu par un étudiant de NEOMA pour les étudiants en école de commerce.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h4>Questions à poser</h4>
+      <p>Liste des meilleures questions à poser à ton recruteur pour finir l'entretien en force.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section">
+  <div class="section-label">Témoignages</div>
+  <h2 class="section-title">Ce que disent les bêta-testeurs</h2>
+
+  <div class="testimonial-block">
+    <div class="stars">★★★★★</div>
+    <p class="testimonial-text">"J'avais un entretien chez L'Oréal la semaine dernière. PrepMyStage m'avait généré exactement 3 des questions qu'on m'a posées. J'étais tellement plus serein — j'avais l'impression de connaître déjà mon recruteur avant d'entrer dans la salle."</p>
+    <div class="testimonial-author">
+      <div class="author-avatar">LM</div>
+      <div class="author-info">
+        <p>Lucas M.</p>
+        <span>Étudiant M1 — NEOMA Business School, Reims</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Tes questions</h2>
+
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Pour quels types de stages ça fonctionne ? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Tous les secteurs — finance, conseil, marketing, luxe, RH, tech, banque. L'IA s'adapte à n'importe quelle offre et à n'importe quelle entreprise, de la startup au CAC40.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">C'est différent des autres simulateurs d'entretien ? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Oui. La plupart des outils génèrent des questions génériques. PrepMyStage analyse vraiment TON offre spécifique — l'entreprise, ses valeurs, sa culture, le poste exact — et te prépare aux questions que CE recruteur va poser.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Quand est-ce que j'y ai accès ? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Le lancement est prévu dans 3-4 semaines. En rejoignant maintenant, tu es notifié en priorité et ton prix de 9€/mois est garanti à vie — même quand le prix passera à 19€.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Puis-je annuler à tout moment ? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Oui, tu peux annuler à n'importe quel moment depuis ton espace personnel, sans engagement et sans frais. Aucune carte bancaire n'est demandée à l'inscription.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Ça marche aussi pour les alternances ? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Absolument. Que ce soit pour un stage de 6 mois ou une alternance de 2 ans, PrepMyStage s'adapte au type de contrat et aux attentes spécifiques des recruteurs.</div>
+    </div>
+  </div>
+</section>
+
+<div class="bottom-cta">
+  <h2>Prêt à décrocher ton stage de rêve ?</h2>
+  <p>Rejoins les 23 étudiants déjà en liste d'attente. Prix fondateur à 9€/mois — garanti à vie.</p>
+  <a href="#" class="cta-btn-white" onclick="openModal(); return false;">Je veux accéder à PrepMyStage →</a>
+</div>
+
+<footer>
+  <p>Créé par un étudiant de <strong>NEOMA Business School</strong> · Pour les étudiants en école de commerce, par un étudiant en école de commerce.</p>
+  <p style="margin-top:0.5rem">© 2025 PrepMyStage · <a href="#" style="color:var(--muted)">Mentions légales</a> · <a href="#" style="color:var(--muted)">Contact</a></p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>Rejoins la liste d'attente</h3>
+    <p>Prix fondateur à 9€/mois garanti à vie pour les 50 premiers. Aucune CB requise maintenant.</p>
+    <div class="success-msg" id="success-msg">
+      Parfait ! Tu es sur la liste. On te contacte dès le lancement.
+    </div>
+    <input type="text" id="modal-name" placeholder="Ton prénom">
+    <input type="email" id="modal-email" placeholder="Ton adresse email">
+    <input type="text" id="modal-school" placeholder="Ton école (ex: NEOMA, HEC, ESSEC...)">
+    <button class="modal-submit" onclick="submitForm()">Réserver ma place à 9€/mois →</button>
+    <button class="modal-close" onclick="closeModal()">Non merci, je préfère payer 19€/mois plus tard</button>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById('modal').classList.add('show');
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('show');
+  }
+  function submitForm() {
+    const name = document.getElementById('modal-name').value;
+    const email = document.getElementById('modal-email').value;
+    if (!name || !email) { alert('Merci de remplir ton prénom et ton email.'); return; }
+    document.getElementById('success-msg').style.display = 'block';
+    document.getElementById('modal-name').style.display = 'none';
+    document.getElementById('modal-email').style.display = 'none';
+    document.getElementById('modal-school').style.display = 'none';
+    document.querySelector('.modal-submit').style.display = 'none';
+    document.querySelector('.modal-close').textContent = 'Fermer';
+  }
+  function toggleFaq(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>
